@@ -52,14 +52,12 @@ public class Sneaker {
     public static Sneaker[] ITEMS ={
             new Sneaker(1,"Zapato hombre Velez","Zapato 100% en cuero, tallas de la 37 a la 43", R.drawable.hombre1),
             new Sneaker(2,"Zapato hombre Velez","Zapato 90% en cuero, 10% cuerina, tallas de la 37 a la 43", R.drawable.hombre2),
-            new Sneaker(3,"Zapato hombre Velez", "Zapato 100% en cuero, tallas de la 37 a la 43", R.drawable.hombre3),
             new Sneaker(4,"Zapato hombre Bossi","Zapato 100% en cuero, tallas de la 37 a la 43", R.drawable.hombre6),
             new Sneaker(5,"Zapato hombre Bossi","Zapato 80% en cuero, 10% cuerina, 10% badana, tallas de la 37 a la 43", R.drawable.hombre7),
             new Sneaker(6,"Zapato mujer Velez","Zapato 100% en cuero, tallas de la 34 a la 40", R.drawable.mujer1),
             new Sneaker(7,"Zapato mujer Velez", "Zapato 95% en cuero, 5% badana, tallas de la 34 a la 40", R.drawable.mujer2),
-            new Sneaker(8,"Zapato mujer Velez","Zapato 100% en cuero, tallas de la 34 a la 40", R.drawable.mujer3),
-            new Sneaker(9,"Zapato mujer Bossi","Zapato 100% en cuero, tallas de la 34 a la 40", R.drawable.mujer6),
-            new Sneaker(10,"Zapato mujer Bossi","Zapato 90% en cuero, 10% en cuerina, tallas de la 34 a la 40", R.drawable.mujer7),
+            new Sneaker(9,"Zapato mujer Bossi","Zapato 100% en cuero, tallas de la 34 a la 40", R.drawable.mujer4),
+            new Sneaker(10,"Zapato mujer Bossi","Zapato 90% en cuero, 10% en cuerina, tallas de la 34 a la 40", R.drawable.mujer5),
     };
 
     public static Sneaker getItem(int id){

@@ -24,6 +24,36 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
+    @Override protected void onStart() {
+        super.onStart();
+        Toast.makeText(this, "onStart", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override protected void onResume() {
+        super.onResume();
+        Toast.makeText(this, "Se inicio la activida primaria", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override protected void onPause() {
+        Toast.makeText(this, "Se pauso la actividad primaria", Toast.LENGTH_SHORT).show();
+        super.onPause();
+    }
+
+    @Override protected void onStop() {
+        Toast.makeText(this, "Se paro la actividad primaria", Toast.LENGTH_SHORT).show();
+        super.onStop();
+    }
+
+    @Override protected void onRestart() {
+        super.onRestart();
+        Toast.makeText(this, "Se reestablecio la actividad primaria", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override protected void onDestroy() {
+        Toast.makeText(this, "se destruyo la actividad primaria", Toast.LENGTH_SHORT).show();
+        super.onDestroy();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
@@ -35,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Toast.makeText(this, "Se ha creado la actividad secundaria", Toast.LENGTH_SHORT).show();
 
         setSupportActionBar(binding.appBarMain.toolbar);
 
