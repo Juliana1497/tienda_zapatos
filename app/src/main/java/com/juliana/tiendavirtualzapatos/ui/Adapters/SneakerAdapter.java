@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.juliana.tiendavirtualzapatos.ui.Model.Sneaker;
 import com.juliana.tiendavirtualzapatos.R;
 
@@ -55,7 +57,9 @@ public class SneakerAdapter extends BaseAdapter {
         botonComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context.getApplicationContext(), "Producto agregado al carrito", Toast.LENGTH_SHORT).show();
+                Snackbar snackbar = Snackbar.make(v, "Producto agregado al carrito", 0);
+                snackbar.show();
+                //Toast.makeText(context.getApplicationContext(), "Producto agregado al carrito", Toast.LENGTH_SHORT).show();
             }
         });
 
