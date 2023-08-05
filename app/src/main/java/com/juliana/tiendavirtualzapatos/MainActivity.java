@@ -60,10 +60,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(5000);
         }catch (InterruptedException e){
             throw new RuntimeException(e);
         }
+        setTheme(R.style.Theme_TiendaVirtualZapatos_NoActionBar);
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
