@@ -9,6 +9,7 @@
     <string name="menu_productos">Productos</string>
     <string name="menu_servicios">Servicios</string>
     <string name="menu_sucursales">Sucursales</string>
+    <string name="menu_crear">Crear</string>
 
     <string name="loremipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ornare lectus sit amet est. Maecenas accumsan lacus vel facilisis volutpat est velit. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Amet nulla facilisi morbi tempus. Pretium fusce id velit ut tortor. Libero volutpat sed cras ornare. Ultrices gravida dictum fusce ut placerat orci. Condimentum vitae sapien pellentesque habitant morbi. In ante metus dictum at tempor commodo ullamcorper.
 
@@ -18,6 +19,6 @@ Dolor sit amet consectetur adipiscing elit. Suscipit tellus mauris a diam maecen
 
     <string name="version_app">Version 1.0</string>
     <string name="cerrar_sesion">Cerrar sesión</string>
-    <string name="nosotros">Nosotros</string>
+    <string name="nosotros">Crear</string>
     <string name="carrito_de_compras">Carrito de compras</string>
 </resources>
