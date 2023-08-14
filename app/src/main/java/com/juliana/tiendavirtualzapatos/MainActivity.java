@@ -1,12 +1,12 @@
 package com.juliana.tiendavirtualzapatos;
 
+import android.Manifest;
 import android.content.ContentValues;
-import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
-import android.service.autofill.OnClickAction;
-import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Menu;
@@ -15,9 +15,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -26,19 +25,26 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.juliana.tiendavirtualzapatos.databinding.ActivityMainBinding;
 import com.juliana.tiendavirtualzapatos.ui.bd.AdminSQL;
 import com.juliana.tiendavirtualzapatos.ui.crud.Create;
 
-import kotlinx.coroutines.MainCoroutineDispatcher;
+import org.osmdroid.api.IMapController;
+import org.osmdroid.config.Configuration;
+import org.osmdroid.library.BuildConfig;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private EditText edit1, edit2, edit3, edit4;
-    //private View view;
+    private MapView mapView;
+    private IMapController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        Configuration.getInstance().setUserAgentValue(BuildConfig.BUILD_TYPE);
+        isStoragePermissionGranted();
+        mapView=findViewById(R.id.mapViewAthena);
+        GeoPoint sucursalNorte = new GeoPoint(4.647250,-74.101606);
+
+
         setSupportActionBar(binding.appBarMain.toolbar);
 
         DrawerLayout drawer = binding.drawerLayout;
@@ -66,10 +78,44 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
+
         edit1 = (EditText) findViewById(R.id.editText1);
         edit2 = (EditText) findViewById(R.id.editText2);
         edit3 = (EditText) findViewById(R.id.editText3);
         edit4 = (EditText) findViewById(R.id.editText4);
+    }
+    protected void onResume(){
+        super.onResume();
+        if(mapView!=null)
+            mapView.onResume();
+    }
+
+    protected void onPause(){
+        super.onPause();
+        if (mapView!=null)
+            mapView.onPause();
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
+    }
+    public boolean isStoragePermissionGranted(){
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED &&
+            checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
+                return true;
+            }else{
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION},1);
+                return false;
+            }
+        }else {
+            return true;
+        }
     }
 
     @Override
@@ -175,10 +221,5 @@ public class MainActivity extends AppCompatActivity {
         bd.close();
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
+
 }

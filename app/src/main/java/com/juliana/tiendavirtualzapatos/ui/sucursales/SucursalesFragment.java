@@ -11,6 +11,7 @@ import com.juliana.tiendavirtualzapatos.R;
 
 public class SucursalesFragment extends Fragment {
 
+
     public SucursalesFragment(){
 
     }
