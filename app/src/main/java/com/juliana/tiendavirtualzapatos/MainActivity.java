@@ -34,6 +34,7 @@ import org.osmdroid.config.Configuration;
 import org.osmdroid.library.BuildConfig;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 
@@ -43,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private EditText edit1, edit2, edit3, edit4;
-    private MapView mapView;
-    private IMapController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        Configuration.getInstance().setUserAgentValue(BuildConfig.BUILD_TYPE);
-        isStoragePermissionGranted();
-        mapView=findViewById(R.id.mapViewAthena);
-        GeoPoint sucursalNorte = new GeoPoint(4.647250,-74.101606);
 
 
         setSupportActionBar(binding.appBarMain.toolbar);
@@ -79,44 +73,19 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-
-
         edit1 = (EditText) findViewById(R.id.editText1);
         edit2 = (EditText) findViewById(R.id.editText2);
         edit3 = (EditText) findViewById(R.id.editText3);
         edit4 = (EditText) findViewById(R.id.editText4);
     }
-    protected void onResume(){
-        super.onResume();
-        if(mapView!=null)
-            mapView.onResume();
-    }
 
-    protected void onPause(){
-        super.onPause();
-        if (mapView!=null)
-            mapView.onPause();
-    }
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-    public boolean isStoragePermissionGranted(){
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED &&
-            checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
-                return true;
-            }else{
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION},1);
-                return false;
-            }
-        }else {
-            return true;
-        }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
